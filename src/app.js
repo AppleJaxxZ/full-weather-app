@@ -52,24 +52,27 @@ app.get("/weather", (req, res) => {
   if (!req.query.address) {
     return res.send({ error: "Please provide an address." });
   } else {
-    geocode(req.query.address, (err, { latitude, longitude, location }) => {
-      if (err) {
-        return console.log(err);
-      }
-
-      weather(latitude, longitude, (err, forecastData) => {
+    geocode(
+      req.query.address,
+      (err, { latitude, longitude, location } = {}) => {
         if (err) {
-          return console.log(err);
+          return res.send(err);
         }
-        console.log("Current Weather: ");
-        console.log(location);
-        console.log(forecastData);
-        res.send({
-          Location: location,
-          forecast: forecastData,
+
+        weather(latitude, longitude, (err, forecastData) => {
+          if (err) {
+            return res.send(err);
+          }
+          console.log("Current Weather: ");
+          console.log(location);
+          console.log(forecastData);
+          res.send({
+            Location: location,
+            forecast: forecastData,
+          });
         });
-      });
-    });
+      }
+    );
   }
 });
 
