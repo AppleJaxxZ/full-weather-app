@@ -2,6 +2,8 @@ const path = require("path");
 const express = require("express");
 const hbs = require("hbs");
 const dotenv = require("dotenv");
+const geocode = require("./utils/geocode");
+const weather = require("./utils/weather");
 dotenv.config();
 
 const app = express();
@@ -49,13 +51,26 @@ app.get("/help", (req, res) => {
 app.get("/weather", (req, res) => {
   if (!req.query.address) {
     return res.send({ error: "Please provide an address." });
+  } else {
+    geocode(req.query.address, (err, { latitude, longitude, location }) => {
+      if (err) {
+        return console.log(err);
+      }
+
+      weather(latitude, longitude, (err, forecastData) => {
+        if (err) {
+          return console.log(err);
+        }
+        console.log("Current Weather: ");
+        console.log(location);
+        console.log(forecastData);
+        res.send({
+          Location: location,
+          forecast: forecastData,
+        });
+      });
+    });
   }
-  console.log(req.query.address);
-  res.send({
-    Location: "Breinigsville",
-    forecast: "Gloomy",
-    address: "This one",
-  });
 });
 
 app.get("/products", (req, res) => {
