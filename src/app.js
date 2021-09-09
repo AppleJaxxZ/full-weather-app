@@ -54,14 +54,14 @@ app.get("/weather", (req, res) => {
   } else {
     geocode(
       req.query.address,
-      (err, { latitude, longitude, location } = {}) => {
-        if (err) {
-          return res.send(err);
+      (error, { latitude, longitude, location } = {}) => {
+        if (error) {
+          return res.send({ error });
         }
 
-        weather(latitude, longitude, (err, forecastData) => {
-          if (err) {
-            return res.send(err);
+        weather(latitude, longitude, (error, forecastData) => {
+          if (error) {
+            return res.send({ error });
           }
           console.log("Current Weather: ");
           console.log(location);
