@@ -16,9 +16,12 @@ const weather = (lat, long, callback) => {
       callback("unable to find location.", undefined);
     } else {
       const data = body.current;
+      const img = body.current.weather_icons;
+      const time = body.location.localtime;
+      const code = body.current.weather_code;
       callback(
         undefined,
-        `${data.weather_descriptions[0]}. It is currently ${data.temperature} degrees out.  It feels like ${data.feelslike} degrees out. `
+        `<b>${time} <br><br> <img class='weather-icon' src=${img}><br> <br> ${data.weather_descriptions[0]}.<br><br> ${data.temperature} degrees. <br><br> Real-Feel: ${data.feelslike} degrees.<br><br> Universal Weather Code: ${code} `
       );
     }
   });

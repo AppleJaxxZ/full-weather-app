@@ -1,5 +1,5 @@
 body {
-  color: #333333;
+  color: white;
   font-family: arial;
   max-width: 650px;
   margin: 0 auto;
@@ -8,14 +8,20 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  border: 2px solid black;
+  border-radius: 15px;
 }
 
+.main-container {
+  background: #51b3cf;
+  padding: 10px;
+}
 .main-content {
   flex-grow: 1;
 }
 
 footer {
-  color: #888888;
+  color: white;
   border-top: 1px solid #eeeeee;
   margin-top: 16px;
   padding: 16px 0;
@@ -32,7 +38,7 @@ h1 {
 }
 
 header a {
-  color: #888888;
+  color: white;
   margin-right: 16px;
   text-decoration: none;
 }
@@ -43,13 +49,41 @@ header a {
 
 input {
   border: 1px solid #cccccc;
+  border-radius: 5px;
   padding: 8px;
 }
 
 button {
   cursor: pointer;
   border: 1px solid #888888;
+  border-radius: 10px;
   background: #888888;
   color: white;
   padding: 8px;
+}
+
+.weatherContainer {
+  border: 2px solid #cccccc;
+  border-radius: 15px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#message-1 {
+  justify-content: space-between;
+  text-align: center;
+  font-weight: bolder;
+}
+
+#message-2 {
+  justify-content: space-between;
+  text-align: center;
+}
+
+.weather-icon {
+  height: 150px;
+  width: auto;
+  border-radius: 50%;
+  overflow: hidden;
 }

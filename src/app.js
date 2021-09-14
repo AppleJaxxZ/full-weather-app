@@ -30,6 +30,7 @@ app.get("", (req, res) => {
   //render is used for dynamic files in hbs
   res.render("index", {
     title: "Weather",
+    sub: "Simple, Easy, Fast Forecasts For Your Area.",
     name: "Alex Zajacek",
   });
 });
@@ -64,9 +65,6 @@ app.get("/weather", (req, res) => {
           if (error) {
             return res.send({ error });
           }
-          console.log("Current Weather: ");
-          console.log(location);
-          console.log(forecastData);
           res.send({
             Location: location,
             forecast: forecastData,
